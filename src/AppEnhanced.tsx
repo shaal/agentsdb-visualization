@@ -5,6 +5,7 @@ import React from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import EnhancedDashboard from './components/EnhancedDashboard';
+import { LanguageModeProvider } from './contexts/LanguageModeContext';
 
 // Create a Material-UI dark theme
 const theme = createTheme({
@@ -79,10 +80,12 @@ const AppEnhanced: React.FC = () => {
   const serverUrl = (import.meta as any).env?.VITE_ENHANCED_SERVER_URL || 'http://localhost:3002';
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <EnhancedDashboard serverUrl={serverUrl} />
-    </ThemeProvider>
+    <LanguageModeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <EnhancedDashboard serverUrl={serverUrl} />
+      </ThemeProvider>
+    </LanguageModeProvider>
   );
 };
 
