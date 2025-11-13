@@ -116,7 +116,7 @@ class MockAgentDBClient extends AgentDB {
           if (updateCallback) {
             updateCallback(currentData);
           }
-        }, 3000); // Update every 3 seconds
+        }, 200); // Update 5 times per second
         return () => {
           console.log(`MockAgentDBClient: Unsubscribing from liveQuery for path: ${path}`);
           clearInterval(intervalId);

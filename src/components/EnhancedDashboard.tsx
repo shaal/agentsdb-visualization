@@ -105,7 +105,7 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
     };
 
     fetchStats();
-    const interval = setInterval(fetchStats, 3000);
+    const interval = setInterval(fetchStats, 200);
     return () => clearInterval(interval);
   }, [serverUrl]);
 
@@ -126,7 +126,7 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
     };
 
     fetchActions();
-    const interval = setInterval(fetchActions, 5000);
+    const interval = setInterval(fetchActions, 200);
     return () => clearInterval(interval);
   }, [serverUrl]);
 
@@ -145,7 +145,7 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
     };
 
     fetchCausal();
-    const interval = setInterval(fetchCausal, 5000);
+    const interval = setInterval(fetchCausal, 200);
     return () => clearInterval(interval);
   }, [serverUrl]);
 
@@ -164,7 +164,7 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
     };
 
     fetchSkills();
-    const interval = setInterval(fetchSkills, 10000);
+    const interval = setInterval(fetchSkills, 200);
     return () => clearInterval(interval);
   }, [serverUrl]);
 

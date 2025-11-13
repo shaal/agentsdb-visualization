@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 
 // Configuration
 const PORT = process.env.PORT || 3002;
-const DATA_UPDATE_INTERVAL = 3000;
+const DATA_UPDATE_INTERVAL = 200;
 
 // Initialize services
 const dataDir = path.join(__dirname, '..', 'data');

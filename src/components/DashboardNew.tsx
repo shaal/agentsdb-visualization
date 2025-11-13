@@ -111,7 +111,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   // HTTP Polling connection
   const polling = useAgentDBPolling({
     url: `${serverUrl}/api/dashboard`,
-    interval: 3000,
+    interval: 200,
     enabled: mode === 'polling',
     onError: () => {
       setSnackbarMessage('Failed to fetch data');
