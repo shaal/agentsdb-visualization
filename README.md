@@ -2,6 +2,32 @@
 
 A real-time data visualization dashboard powered by [AgentDB](https://github.com/ruvnet/agentic-flow) with dual connection modes: WebSocket for real-time updates and HTTP polling for compatibility.
 
+## 🎓 New: Educational Features!
+
+This dashboard now includes **kid-friendly explanations** and educational components perfect for teaching AI concepts!
+
+### For Students (Grades 5+):
+- 📚 **[README for Kids](README-FOR-KIDS.md)** - Learn how robot brains work with simple language and fun examples!
+- 🔄 **ELI5 Mode Toggle** - Switch between technical and kid-friendly language in the dashboard
+- 🍕 **Before/After Stories** - See how robots get better (Pizza Delivery & Homework Helper!)
+- 🌊 **Animated Data Flow** - Watch how questions travel through the robot's brain
+
+### For Teachers:
+- 👩‍🏫 **[Teacher's Guide](README-FOR-TEACHERS.md)** - Complete lesson plans, activities, and discussion guides
+- 📊 Aligned with CSTA and NGSS standards
+- 🎯 Ready-to-use assessments and rubrics
+- 🏫 Perfect for grades 5-8 computer science and STEM classes
+
+### Four "Superpowers" Explained Simply:
+1. 🔍 **Super Search** - Finding similar things (Vector Search)
+2. 🧠 **Cause & Effect Brain** - Remembering what works (Causal Memory)
+3. 🎯 **Trick Collection** - Saving learned skills (Skill Library)
+4. 🤔 **Learning from Mistakes** - Getting better (Reflexion)
+
+**Try it now:** Start the dashboard and toggle the "Kid-Friendly" switch in the top right!
+
+---
+
 ## Features
 
 - **Real AgentDB Integration** - Uses the actual AgentDB from agentic-flow

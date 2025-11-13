@@ -24,13 +24,21 @@ import {
   List,
   ListItem,
   ListItemText,
-  Divider
+  Divider,
+  Switch,
+  FormControlLabel,
+  Tooltip
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MemoryIcon from '@mui/icons-material/Memory';
 import SchoolIcon from '@mui/icons-material/School';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import ChildFriendlyIcon from '@mui/icons-material/ChildFriendly';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import { useLanguageMode } from '../contexts/LanguageModeContext';
+import { BeforeAfterComparison } from './BeforeAfterComparison';
+import { DataFlowVisualizer } from './DataFlowVisualizer';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -81,6 +89,7 @@ interface EnhancedStats {
 const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
   serverUrl = 'http://localhost:3002',
 }) => {
+  const { mode, toggleMode, getText } = useLanguageMode();
   const [stats, setStats] = useState<EnhancedStats | null>(null);
   const [actions, setActions] = useState<AgentAction[]>([]);
   const [causalRelations, setCausalRelations] = useState<CausalRelation[]>([]);
@@ -195,7 +204,7 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
         <CircularProgress />
         <Typography variant="h6" sx={{ ml: 2 }}>
-          Loading Enhanced AgentDB Dashboard...
+          {getText('Loading Enhanced AgentDB Dashboard...', '🤖 Loading the Robot Brain Dashboard...')}
         </Typography>
       </Box>
     );
@@ -203,30 +212,97 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
 
   return (
     <Box sx={{ p: 3 }}>
-      <Typography variant="h3" component="h1" gutterBottom>
-        Enhanced AgentDB Dashboard
-      </Typography>
-      <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-        Real-time monitoring of advanced AgentDB features
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Box>
+          <Typography variant="h3" component="h1" gutterBottom>
+            {getText('Enhanced AgentDB Dashboard', '🤖 Robot Super Brain Dashboard')}
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+            {getText(
+              'Real-time monitoring of advanced AgentDB features',
+              'Watch how the robot learns and gets smarter in real-time! 🚀'
+            )}
+          </Typography>
+        </Box>
+        <Tooltip title={mode === 'eli5' ? 'Switch to Technical Mode' : 'Switch to Kid-Friendly Mode'}>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={mode === 'eli5'}
+                onChange={toggleMode}
+                color="primary"
+              />
+            }
+            label={
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                {mode === 'eli5' ? (
+                  <>
+                    <ChildFriendlyIcon />
+                    <Typography variant="body2">Kid-Friendly</Typography>
+                  </>
+                ) : (
+                  <>
+                    <EngineeringIcon />
+                    <Typography variant="body2">Technical</Typography>
+                  </>
+                )}
+              </Box>
+            }
+          />
+        </Tooltip>
+      </Box>
+
+      {/* Add new educational components */}
+      <BeforeAfterComparison />
+      <DataFlowVisualizer />
 
       {/* Statistics Overview */}
       <Box sx={{ my: 3 }}>
         <Paper sx={{ p: 2 }}>
           <Typography variant="h6" gutterBottom>
-            System Statistics
+            {getText('System Statistics', '📊 Robot Brain Stats')}
           </Typography>
           <Box>
-            <StatChip label={`Actions: ${stats?.totalActions || 0}`} color="primary" />
-            <StatChip label={`Skills: ${stats?.totalSkills || 0}`} color="secondary" />
-            <StatChip label={`Episodes: ${stats?.totalEpisodes || 0}`} color="info" />
-            <StatChip label={`Causal Edges: ${stats?.totalCausalEdges || 0}`} color="success" />
             <StatChip
-              label={`Vector Search: ${stats?.vectorSearchEnabled ? 'ON' : 'OFF'}`}
+              label={getText(
+                `Actions: ${stats?.totalActions || 0}`,
+                `🎬 Things Done: ${stats?.totalActions || 0}`
+              )}
+              color="primary"
+            />
+            <StatChip
+              label={getText(
+                `Skills: ${stats?.totalSkills || 0}`,
+                `🎯 Tricks Learned: ${stats?.totalSkills || 0}`
+              )}
+              color="secondary"
+            />
+            <StatChip
+              label={getText(
+                `Episodes: ${stats?.totalEpisodes || 0}`,
+                `📚 Memories: ${stats?.totalEpisodes || 0}`
+              )}
+              color="info"
+            />
+            <StatChip
+              label={getText(
+                `Causal Edges: ${stats?.totalCausalEdges || 0}`,
+                `🔗 Cause & Effect: ${stats?.totalCausalEdges || 0}`
+              )}
+              color="success"
+            />
+            <StatChip
+              label={getText(
+                `Vector Search: ${stats?.vectorSearchEnabled ? 'ON' : 'OFF'}`,
+                `🔍 Super Search: ${stats?.vectorSearchEnabled ? 'ON' : 'OFF'}`
+              )}
               color={stats?.vectorSearchEnabled ? 'success' : 'default'}
             />
             <StatChip
-              label={`WASM: ${stats?.wasmEnabled ? 'ON' : 'OFF'}`}
+              label={getText(
+                `WASM: ${stats?.wasmEnabled ? 'ON' : 'OFF'}`,
+                `⚡ Turbo Mode: ${stats?.wasmEnabled ? 'ON' : 'OFF'}`
+              )}
               color={stats?.wasmEnabled ? 'success' : 'default'}
             />
           </Box>
@@ -239,15 +315,21 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
           <StyledCard>
             <CardHeader
               avatar={<SearchIcon color="primary" />}
-              title="Vector Search & Embeddings"
-              subheader="Semantic search using neural embeddings"
+              title={getText('Vector Search & Embeddings', '🔍 Super Search')}
+              subheader={getText(
+                'Semantic search using neural embeddings',
+                'Find similar things the robot did before!'
+              )}
             />
             <CardContent>
               <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
                 <TextField
                   fullWidth
                   size="small"
-                  placeholder="Search actions semantically..."
+                  placeholder={getText(
+                    'Search actions semantically...',
+                    'Ask about what the robot did...'
+                  )}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
@@ -257,7 +339,7 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
                   onClick={handleSearch}
                   disabled={searching}
                 >
-                  {searching ? <CircularProgress size={24} /> : 'Search'}
+                  {searching ? <CircularProgress size={24} /> : getText('Search', 'Find')}
                 </Button>
               </Box>
 
@@ -289,8 +371,11 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
           <StyledCard>
             <CardHeader
               avatar={<TimelineIcon color="secondary" />}
-              title="Causal Memory Graph"
-              subheader="Intervention-based reasoning"
+              title={getText('Causal Memory Graph', '🧠 Cause & Effect Brain')}
+              subheader={getText(
+                'Intervention-based reasoning',
+                'Robot remembers: when I do X, Y happens!'
+              )}
             />
             <CardContent>
               <TableContainer>
@@ -339,8 +424,11 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
           <StyledCard>
             <CardHeader
               avatar={<SchoolIcon color="info" />}
-              title="Skill Library"
-              subheader="Learned skills from episodes"
+              title={getText('Skill Library', '🎯 Trick Collection')}
+              subheader={getText(
+                'Learned skills from episodes',
+                'All the tricks the robot learned!'
+              )}
             />
             <CardContent>
               <TableContainer>
@@ -387,8 +475,11 @@ const EnhancedDashboard: React.FC<{ serverUrl?: string }> = ({
           <StyledCard>
             <CardHeader
               avatar={<MemoryIcon color="warning" />}
-              title="Recent Agent Actions"
-              subheader="Live activity stream"
+              title={getText('Recent Agent Actions', '🎬 What the Robot Just Did')}
+              subheader={getText(
+                'Live activity stream',
+                'Watch the robot working in real-time!'
+              )}
             />
             <CardContent>
               <List dense>
