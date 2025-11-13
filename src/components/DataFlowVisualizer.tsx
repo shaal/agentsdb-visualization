@@ -7,7 +7,6 @@ import {
   Step,
   StepLabel,
   StepContent,
-  Button,
   styled,
   keyframes,
   Chip
@@ -52,7 +51,7 @@ const flowAnimation = keyframes`
   }
 `;
 
-const AnimatedIcon = styled(Box)<{ active?: boolean }>(({ theme, active }) => ({
+const AnimatedIcon = styled(Box)<{ active?: boolean }>(({ active }) => ({
   animation: active ? `${pulse} 1.5s ease-in-out infinite` : 'none',
   display: 'flex',
   alignItems: 'center',

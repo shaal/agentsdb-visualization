@@ -14,9 +14,7 @@ import {
 import {
   SentimentVeryDissatisfied,
   SentimentVerySatisfied,
-  Speed,
   CheckCircle,
-  Cancel,
   TrendingUp,
   Restaurant
 } from '@mui/icons-material';
@@ -33,7 +31,7 @@ const slideIn = keyframes`
   }
 `;
 
-const AnimatedCard = styled(Card)(({ theme }) => ({
+const AnimatedCard = styled(Card)(() => ({
   animation: `${slideIn} 0.5s ease-out`,
   height: '100%',
   transition: 'transform 0.2s',
@@ -42,7 +40,7 @@ const AnimatedCard = styled(Card)(({ theme }) => ({
   }
 }));
 
-const ProgressBar = styled(LinearProgress)(({ theme }) => ({
+const ProgressBar = styled(LinearProgress)(() => ({
   height: 10,
   borderRadius: 5,
 }));
